@@ -121,7 +121,12 @@ def _load_override(root: Path) -> dict:
     return obj
 
 
-def _build_checks(kind: str, make_targets: list[str], has: dict) -> list[dict]:
+def _trunk_cmd(root: Path) -> str:
+    """Repo-local launcher when present, else the global CLI."""
+    return "./trunk check --no-fix" if (root / "trunk").is_file() else "trunk check --no-fix"
+
+
+def _build_checks(root: Path, kind: str, make_targets: list[str], has: dict) -> list[dict]:
     checks: list[dict] = []
     if "test" in make_targets:
         checks.append({"name": "test", "cmd": "make test"})
@@ -136,7 +141,7 @@ def _build_checks(kind: str, make_targets: list[str], has: dict) -> list[dict]:
         if "check_untracked_files" in make_targets:
             checks.append({"name": "untracked", "cmd": "make check_untracked_files"})
     if has["trunk"]:
-        checks.append({"name": "trunk", "cmd": "./trunk check --no-fix"})
+        checks.append({"name": "trunk", "cmd": _trunk_cmd(root)})
     return checks
 
 
@@ -208,7 +213,7 @@ def build_profile(root: Path) -> dict:
     else:
         guard_paths = []
 
-    checks = _build_checks(kind, make_targets, has)
+    checks = _build_checks(root, kind, make_targets, has)
     locale_version_style = ""
 
     overrides = _load_override(root)

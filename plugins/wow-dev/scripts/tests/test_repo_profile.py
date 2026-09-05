@@ -220,3 +220,20 @@ class TestTextOutput(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestTrunkFallback(unittest.TestCase):
+    def test_trunk_yaml_without_launcher_uses_global_cli(self):
+        import shutil, tempfile
+        from pathlib import Path
+        src = Path(__file__).parent / "fixtures" / "addon_full"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "repo"
+            shutil.copytree(src, root)
+            (root / "trunk").unlink()
+            import repo_profile
+            profile = repo_profile.build_profile(root)
+            self.assertTrue(profile["has"]["trunk"])
+            trunk = [c for c in profile["checks"] if c["name"] == "trunk"]
+            self.assertEqual(trunk, [{"name": "trunk", "cmd": "trunk check --no-fix"}])
+
