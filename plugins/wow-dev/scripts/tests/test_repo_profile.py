@@ -231,6 +231,8 @@ class TestTrunkFallback(unittest.TestCase):
             root = Path(tmp) / "repo"
             shutil.copytree(src, root)
             (root / "trunk").unlink()
+            (root / ".trunk").mkdir(exist_ok=True)
+            (root / ".trunk" / "trunk.yaml").write_text("version: 0.1\n")
             import repo_profile
             profile = repo_profile.build_profile(root)
             self.assertTrue(profile["has"]["trunk"])
