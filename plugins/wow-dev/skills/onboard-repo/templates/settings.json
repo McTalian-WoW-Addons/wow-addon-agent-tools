@@ -1,0 +1,8 @@
+{
+  "extraKnownMarketplaces": {
+    "mctalian-wow-addons": {
+      "source": { "source": "github", "repo": "McTalian-WoW-Addons/wow-addon-agent-tools" }
+    }
+  },
+  "enabledPlugins": { "wow-dev@mctalian-wow-addons": true }
+}

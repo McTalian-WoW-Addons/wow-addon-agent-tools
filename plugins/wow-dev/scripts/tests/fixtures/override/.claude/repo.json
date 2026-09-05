@@ -1,0 +1,6 @@
+{
+  "checks": [{ "name": "only", "cmd": "make test" }],
+  "guardPaths": ["Addon/", "extras/"],
+  "localeVersionStyle": "v",
+  "skipChecks": ["toc"]
+}

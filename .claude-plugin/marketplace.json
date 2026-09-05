@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "mctalian-wow-addons",
+  "description": "Shared Claude Code plugins for McTalian WoW addon repos and wow-build-tools.",
+  "owner": {
+    "name": "McTalian"
+  },
+  "plugins": [
+    {
+      "name": "wow-dev",
+      "description": "Skills, agents, scripts and hooks for the WoW addon daily loop: checks, commit typing, PRs, WoW API lookup, i18n.",
+      "source": "./plugins/wow-dev",
+      "category": "development"
+    }
+  ]
+}

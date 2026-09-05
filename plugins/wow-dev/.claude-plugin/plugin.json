@@ -1,0 +1,10 @@
+{
+  "name": "wow-dev",
+  "version": "0.1.0",
+  "description": "WoW addon dev loop: capability-detected checks, commit typing and PR labels, WoW API lookup across flavors, locale keys, roster of Lua reviewers/implementers.",
+  "author": {
+    "name": "McTalian"
+  },
+  "repository": "https://github.com/McTalian-WoW-Addons/wow-addon-agent-tools",
+  "license": "MIT"
+}

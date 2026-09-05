@@ -1,0 +1,3 @@
+jobs:
+  rel:
+    uses: McTalian-WoW-Addons/wow-build-tools/.github/workflows/release-checks.yml@v1
