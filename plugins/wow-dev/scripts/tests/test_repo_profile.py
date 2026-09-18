@@ -87,6 +87,30 @@ class TestAddonMin(unittest.TestCase):
         self.assertIsNone(self.profile["localeDir"])
 
 
+class TestForeverFlavor(unittest.TestCase):
+    def test_forever_and_classic_era_both_detected(self):
+        root = _helpers.make_temp_repo(
+            {
+                "Makefile": "toc_check:\n\t@true\n",
+                "Addon/Addon.toc": "## Interface: 11509, 16001, 120100\n## Title: Addon\nCore.lua\n",
+                "Addon/Core.lua": "return {}\n",
+            },
+            commits=[{"message": "chore: init"}],
+        )
+        self.addCleanup(shutil.rmtree, root, ignore_errors=True)
+        cp = _helpers.run_script("repo_profile.py", "--root", str(root), "--json", cwd=root)
+        self.assertEqual(cp.returncode, 0, cp.stderr)
+        flavors = _helpers.json_out(cp)["flavors"]
+        self.assertEqual(
+            [(f["interface"], f["name"], f["ref"]) for f in flavors],
+            [
+                (11509, "classic_era", "classic_era"),
+                (16001, "forever", "origin/forever"),
+                (120100, "retail", "live"),
+            ],
+        )
+
+
 class TestLib(unittest.TestCase):
     def setUp(self):
         self.root = _helpers.fixture_repo("lib", commits=[{"message": "chore: init"}])

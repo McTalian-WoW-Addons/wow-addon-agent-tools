@@ -114,7 +114,17 @@ def _band(lo: int, hi: int) -> Callable[[int], bool]:
     return lambda i, lo=lo, hi=hi: lo <= i < hi
 
 
+# First match wins: forever (16xxx) must precede classic_era (1xxxx).
+# forever's product is provisional: Blizzard serves it on wow_classic_beta
+# until it gets its own product ID.
 FLAVORS: list[dict] = [
+    {
+        "band": "16xxx",
+        "name": "forever",
+        "ref": "origin/forever",
+        "product": "wow_classic_beta",
+        "match": _band(16000, 17000),
+    },
     {
         "band": "1xxxx",
         "name": "classic_era",
