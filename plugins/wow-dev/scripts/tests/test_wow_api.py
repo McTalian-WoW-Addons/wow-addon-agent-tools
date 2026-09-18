@@ -16,6 +16,7 @@ import unittest
 from pathlib import Path
 
 import _helpers
+import _common as C
 
 SCRIPTS_DIR = _helpers.SCRIPTS_DIR
 
@@ -234,6 +235,7 @@ class TestFind(SyntheticRepoTestCase):
         self.assertFalse(by_flavor["classic_era"]["exists"])
         self.assertFalse(by_flavor["classic_era"]["present"])
         self.assertFalse(by_flavor["tbc_anniversary"]["exists"])
+        self.assertFalse(by_flavor["forever"]["exists"])
         self.assertTrue(by_flavor["retail"]["exists"])
 
     def test_unknown_flavor_name_is_usage_error(self):
@@ -366,6 +368,7 @@ class TestBranches(SyntheticRepoTestCase):
         self.assertFalse(by_name["classic_era"]["exists"])
         self.assertIsNone(by_name["classic_era"]["version"])
         self.assertFalse(by_name["tbc_anniversary"]["exists"])
+        self.assertFalse(by_name["forever"]["exists"])
 
 
 class TestMissingSource(unittest.TestCase):
@@ -399,7 +402,7 @@ class TestRealWowUiSource(unittest.TestCase):
         self.assertEqual(cp.returncode, 0, cp.stderr)
         obj = _helpers.json_out(cp)
         present = [f["flavor"] for f in obj["flavors"] if f["present"]]
-        self.assertEqual(len(present), 4, obj["summary"])
+        self.assertEqual(sorted(present), sorted(f["name"] for f in C.FLAVORS), obj["summary"])
 
     def test_show_get_currency_info_has_arguments(self):
         cp = _helpers.run_script(

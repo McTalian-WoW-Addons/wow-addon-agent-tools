@@ -16,6 +16,16 @@ class TestFlavors(unittest.TestCase):
         self.assertEqual(f["ref"], "classic_era")
         self.assertEqual(f["product"], "wow_classic_era")
 
+    def test_forever_band(self):
+        f = C.flavor_for(16001)
+        self.assertEqual(f["name"], "forever")
+        self.assertEqual(f["ref"], "origin/forever")
+        self.assertEqual(f["product"], "wow_classic_beta")
+
+    def test_forever_band_does_not_shadow_classic_era(self):
+        for interface in (11509, 15999, 17000, 19999):
+            self.assertEqual(C.flavor_for(interface)["name"], "classic_era", interface)
+
     def test_tbc_anniversary_band(self):
         f = C.flavor_for(20506)
         self.assertEqual(f["name"], "tbc_anniversary")

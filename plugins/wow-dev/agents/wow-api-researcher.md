@@ -28,8 +28,8 @@ uv run --no-project "${CLAUDE_PLUGIN_ROOT}/scripts/wow_api.py" show <Symbol> --f
 5. Build the output table, one row per symbol.
 
 ## Output
-`symbol | retail | mop_classic | classic_era | tbc_anniversary | deprecated | note`
-Cell value is the ref that answered (`live`, `classic`, `classic_era`, `origin/classic_anniversary`) or `absent`. `note` names the arity difference or usage pattern.
+`symbol | retail | mop_classic | classic_era | tbc_anniversary | forever | deprecated | note`
+Cell value is the ref that answered (`live`, `classic`, `classic_era`, `origin/classic_anniversary`, `origin/forever`) or `absent`. `note` names the arity difference or usage pattern.
 
 ## Never
 - Check out or fetch a wow-ui-source branch.

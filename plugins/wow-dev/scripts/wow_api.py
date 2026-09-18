@@ -8,9 +8,9 @@ wow-ui-source checkout. See docs/contract.md and PLAN.md §4.2 for the CLI
 contract and skills/wow-api/SKILL.md for the commands the model runs.
 
 Source root: $WOW_UI_SOURCE, default ~/code/wow-ui-source. Refs come from
-_common.FLAVORS (retail/mop_classic/classic_era/tbc_anniversary); --ref adds
-an arbitrary extra ref (ptr, ptr2, beta, classic_ptr, classic_beta,
-classic_era_ptr, ...).
+_common.FLAVORS (retail/mop_classic/classic_era/tbc_anniversary/forever);
+--ref adds an arbitrary extra ref (ptr, ptr2, beta, classic_ptr,
+classic_beta, classic_era_ptr, ...).
 """
 
 import argparse

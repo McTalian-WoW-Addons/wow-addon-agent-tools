@@ -35,7 +35,21 @@ uv run --no-project "${CLAUDE_PLUGIN_ROOT}/scripts/wow_api.py" branches
 ## Flavor names
 
 The only valid `--flavor`/`--flavors` values: `retail`, `mop_classic`, `classic_era`,
-`tbc_anniversary`. PTR/beta refs go through `--ref` instead of a flavor name.
+`tbc_anniversary`, `forever`. PTR/beta refs go through `--ref` instead of a flavor name.
+
+## Forever gaps
+
+`forever` (`origin/forever`, interface 16xxx) is Mainline-based UI under game type
+`camelot`. Blizzard TOC tags there: `camelot` = Forever, `standard` = Retail only,
+`mainline` = Retail + Forever. A Blizzard addon Forever lacks shows up as either tag:
+
+```bash
+git -C "${WOW_UI_SOURCE:-$HOME/code/wow-ui-source}" grep -l -E '^## ExcludeLoadGameType:.*camelot' origin/forever -- '*.toc'
+git -C "${WOW_UI_SOURCE:-$HOME/code/wow-ui-source}" grep -E '^## AllowLoadGameType:' origin/forever -- '*.toc' | grep -w standard | grep -v camelot
+```
+
+A symbol whose only documentation lives in one of those addons is absent on Forever
+even when `find` reports it present on `origin/forever`.
 
 ## When to delegate
 
